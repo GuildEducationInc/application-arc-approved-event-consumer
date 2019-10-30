@@ -21,6 +21,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: "Install tools"
+          command: apt install -y rsync
+      - run:
           name: 'Deploy Dev'
           command: STAGE=dev make
   deploy_prod:
@@ -29,6 +32,9 @@ jobs:
     working_directory: ~/application-arc-approved-event-consumer
     steps:
       - checkout
+      - run:
+          name: "Install tools"
+          command: apt install -y rsync
       - run:
           name: 'Deploy Prod'
           command: STAGE=prod make
