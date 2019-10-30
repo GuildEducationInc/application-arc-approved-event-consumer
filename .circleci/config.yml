@@ -25,7 +25,7 @@ jobs:
           command: apt-get update && apt-get install -y rsync
       - run:
           name: "Setup AWS"
-          command: ./setup_aws.sh
+          command: ./aws_setup.sh
       - run:
           name: 'Deploy Dev'
           command: STAGE=dev make
@@ -40,7 +40,7 @@ jobs:
           command: apt-get update && apt-get install -y rsync
       - run:
           name: "Setup AWS"
-          command: ./setup_aws.sh
+          command: ./aws_setup.sh
       - run:
           name: 'Deploy Prod'
           command: STAGE=prod make
