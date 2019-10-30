@@ -23,6 +23,9 @@ jobs:
       - run:
           name: "Install tools"
           command: apt-get update && apt-get install -y rsync
+     - run:
+         name: "Setup AWS"
+         command: ./setup_aws.sh
       - run:
           name: 'Deploy Dev'
           command: STAGE=dev make
@@ -35,6 +38,9 @@ jobs:
       - run:
           name: "Install tools"
           command: apt-get update && apt-get install -y rsync
+      - run:
+          name: "Setup AWS"
+          command: ./setup_aws.sh
       - run:
           name: 'Deploy Prod'
           command: STAGE=prod make
