@@ -6,9 +6,8 @@ async function handleEvent(event, config, approve, parse) {
         case "salesforce-application-arc-approved":
             return handleApprovalEvent(event, config, approve, parse);
         default:
-            return async () => {
-                console.log(`Arc approval event handler has no handler for event type ${eventType}`)
-            };
+            console.log(`Arc approval event handler has no handler for event type ${eventType}`);
+            return async () => {};
     }
 }
 
