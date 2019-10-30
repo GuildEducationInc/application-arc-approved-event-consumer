@@ -1,0 +1,79 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+
+Parameters:
+  StageName:
+    Type: String
+    Default: dev
+    AllowedValues:
+      - dev
+      - local
+    Description: Lambda function stage
+  ApiKey:
+    Type: AWS::SSM::Parameter::Value<List<String>>
+    Description: The value of the secret key used to sign Guild jwts
+    Default: guild-graphql-service-api-keys-dev
+  AcademicApiUrl:
+    Type: AWS::SSM::Parameter::Value<String>
+    Description: The url of the academic service
+    Default: slack-api-host
+
+Mappings:
+  Environments:
+    dev:
+      'SecurityGroupIds': ['sg-06acd0c0562ab8f39']
+      'VpcSubnetIds': ['subnet-0fbd73727c8e849da', 'subnet-0b707dd8fe6a94da3', 'subnet-0280b748eb6df4800']
+    prod:
+      'SecurityGroupIds': ['sg-0a5d80bdc60380a3e']
+      'VpcSubnetIds': ['subnet-7d12681b', 'subnet-920893da', 'subnet-c45a609f']
+
+Resources:
+  ApplicationArcApprovedEventConsumer:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      AutoPublishAlias: current
+      Handler: index.handler
+      Runtime: nodejs10.x
+      CodeUri: package.zip
+      FunctionName: 'application-arc-approved-event-consumer'
+      Timeout: 300
+      DeploymentPreference:
+        Type: AllAtOnce
+      Environment:
+        Variables:
+          API_KEY: !Select [0, !Ref ApiKey]
+          ACADEMIC_API_URL:
+            'Fn::ImportValue':
+              !Sub ${StageName}AcademicAPIURL
+      VpcConfig:
+        SecurityGroupIds: { 'Fn::FindInMap': ['Environments', { 'Ref': 'StageName' }, 'SecurityGroupIds'] }
+        SubnetIds: { 'Fn::FindInMap': ['Environments', { 'Ref': 'StageName' }, 'VpcSubnetIds'] }
+      Policies:
+        - VPCAccessPolicy: {}
+        - Statement:
+            Effect: 'Allow'
+            Action:
+              - 'lambda:InvokeFunction'
+            Resource: '*'
+        - Statement:
+            Effect: 'Allow'
+            Action:
+              - 'kinesis:DescribeStream'
+              - 'kinesis:DescribeStreamSummary'
+              - 'kinesis:GetRecords'
+              - 'kinesis:GetShardIterator'
+              - 'kinesis:ListShards'
+              - 'kinesis:ListStreams'
+              - 'kinesis:SubscribeToShard'
+            Resource: '*'
+
+  ArcApprovalEventMapping:
+    Type: 'AWS::Lambda::EventSourceMapping'
+    Properties:
+      BatchSize: 100
+      Enabled: true
+      EventSourceArn:
+        'Fn::ImportValue':
+          !Sub salesforce-event-stream-arn-${StageName}
+      FunctionName: !Ref ApplicationArcApprovedEventConsumer
+      StartingPosition: TRIM_HORIZON

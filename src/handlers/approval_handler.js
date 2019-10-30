@@ -1,6 +1,18 @@
-async function approvalHandler(event, context, config, approve, parse, getEventData) {
-    return await Promise.all(event.Records.map(getEventData).map(parse)
-        .map((id, approvalDate) => approve(id, approvalDate, config)))
+const { ApprovalError } = require('../errors/errors');
+
+async function handleApprovalEvent(event, config, approve, parse) {
+    let applicationId;
+    try {
+        applicationId = await approve(parse(event), config);
+    } catch(error) {
+        if(error instanceof ApprovalError) {
+            applicationId = 'error';
+            console.log(`An error occurred processing approval event: ${error.message}`)
+        } else {
+            throw error;
+        }
+    }
+    return applicationId
 }
 
-module.exports = approvalHandler;
+module.exports = handleApprovalEvent;
