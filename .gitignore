@@ -109,6 +109,5 @@ dist
 # Deploy Packages
 package.dev.yaml
 package.prod.yaml
-package.json
 package.zip
 package/

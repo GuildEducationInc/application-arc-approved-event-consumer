@@ -10,7 +10,8 @@ Run `STAGE=dev make` to deploy to dev.
 Run `make clean` to cleanup the deploy artifacts.
 
 ## About
-Consume `salesforce-application-arc-approved` events from the event bus.
+1. Consumes `salesforce-application-arc-approved` events from the event bus.
+2. Uses the genesis application id on the event to call academic services' `approveApplication` mutation.
 
 These events are of the form:
 ```$json

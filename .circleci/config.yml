@@ -8,6 +8,7 @@ jobs:
       - image: guildeducation/node-lambda:latest
     working_directory: ~/application-arc-approved-event-consumer
     steps:
+      - checkout
       - run:
           name: 'Test'
           command: |
@@ -18,6 +19,7 @@ jobs:
       - image: guildeducation/node-lambda:latest
     working_directory: ~/application-arc-approved-event-consumer
     steps:
+      - checkout
       - run:
           name: 'Deploy Dev'
           command: STAGE=dev make
@@ -26,6 +28,7 @@ jobs:
       - image: guildeducation/node-lambda:latest
     working_directory: ~/application-arc-approved-event-consumer
     steps:
+      - checkout
       - run:
           name: 'Deploy Prod'
           command: STAGE=prod make

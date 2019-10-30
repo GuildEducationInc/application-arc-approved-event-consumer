@@ -1,0 +1,20 @@
+{
+  "name": "application-arc-approved-event-consumer",
+  "version": "1.0.0",
+  "description": "Consumes application arc approved events from the event bus",
+  "main": "index2.js",
+  "scripts": {
+    "test": "node_modules/.bin/mocha spec/**"
+  },
+  "author": "Spencer Post",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "fetch-mock": "^8.0.0-alpha.11",
+    "mocha": "^6.2.2"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.0",
+    "require": "^2.4.20"
+  }
+}
