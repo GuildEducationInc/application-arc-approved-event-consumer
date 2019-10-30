@@ -24,7 +24,10 @@ jobs:
           name: "Install tools"
           command: apt-get update && apt-get install -y rsync
       - run:
-          name: "Setup AWS"
+          name: "Setup Path"
+          command: echo 'export PATH=~/.local/bin/:$PATH' >> $BASH_ENV
+      - run:
+          name: "Configure AWS"
           command: ./aws_setup.sh
       - run:
           name: 'Deploy Dev'
@@ -39,7 +42,10 @@ jobs:
           name: "Install tools"
           command: apt-get update && apt-get install -y rsync
       - run:
-          name: "Setup AWS"
+          name: "Setup Path"
+          command: echo 'export PATH=~/.local/bin/:$PATH' >> $BASH_ENV
+      - run:
+          name: "Configure AWS"
           command: ./aws_setup.sh
       - run:
           name: 'Deploy Prod'
