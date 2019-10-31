@@ -32,7 +32,7 @@ describe('parse', () => {
   it('errors when an event is missing application id', () => {
     try {
       parse(eventWithoutApplicationId);
-      throw new Error("Can't reach.");
+      throw new Error('Test failed--expected error to have already been thrown');
     } catch (ex) {
       expect(ex.message).to.contain('application id');
     }
@@ -40,7 +40,7 @@ describe('parse', () => {
   it('errors when an event missing arc approval date', () => {
     try {
       parse(eventWithoutApprovalDate);
-      throw new Error("Can't reach.");
+      throw new Error('Test failed--expected error to have already been thrown');
     } catch (ex) {
       expect(ex.message).to.contain('approval date');
     }

@@ -32,7 +32,7 @@ describe('approve', () => {
         },
         config
       );
-      throw new Error("Can't reach.");
+      throw new Error('Test failed--expected error to have already been thrown');
     } catch (ex) {
       expect(ex.message).to.contain('403');
     }
@@ -52,7 +52,7 @@ describe('approve', () => {
         },
         config
       );
-      throw new Error("Can't reach.");
+      throw new Error('Test failed--expected error to have already been thrown');
     } catch (ex) {
       expect(ex.message).to.contain(message1);
       expect(ex.message).to.contain(message2);
