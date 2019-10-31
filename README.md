@@ -5,6 +5,8 @@
 2. Install the dependencies: `npm install`.
 3. Run the tests `npm test`.
 
+What are your thoughts on using aws sam to build and deploy this stuff? I think this is totally legit, just wondering what your thought process
+behind going the bare metal/hand rolled route was?
 ## Deploy
 Run `STAGE=dev make` to deploy to dev.
 Run `make clean` to cleanup the deploy artifacts.

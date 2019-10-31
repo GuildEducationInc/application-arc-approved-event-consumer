@@ -6,6 +6,8 @@ Parameters:
     Type: String
     Default: dev
     AllowedValues:
+      - prod
+      - stage
       - dev
       - local
     Description: Lambda function stage
@@ -21,8 +23,12 @@ Parameters:
 Mappings:
   Environments:
     dev:
+      ### Where are these ids coming from again? can we import them instead of hardcoding them? Ignore me if this is the same thing
+      ### that I pushed on a while back and we werent able to solve 😅
       'SecurityGroupIds': ['sg-06acd0c0562ab8f39']
       'VpcSubnetIds': ['subnet-0fbd73727c8e849da', 'subnet-0b707dd8fe6a94da3', 'subnet-0280b748eb6df4800']
+    ### I think we should assume that we'll have a staging environment soon. I attempted to do this in 
+    ### this PR: https://github.com/GuildEducationInc/transaction-service/pull/62/files#diff-e77f50b99f53d31b4a9699fc21abc6efR78
     prod:
       'SecurityGroupIds': ['sg-0a5d80bdc60380a3e']
       'VpcSubnetIds': ['subnet-7d12681b', 'subnet-920893da', 'subnet-c45a609f']
