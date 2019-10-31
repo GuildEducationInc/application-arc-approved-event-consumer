@@ -2,7 +2,7 @@
   "name": "application-arc-approved-event-consumer",
   "version": "1.0.0",
   "description": "Consumes application arc approved events from the event bus",
-  "main": "index2.js",
+  "main": "index.js",
   "scripts": {
     "test": "node_modules/.bin/mocha spec/**"
   },
