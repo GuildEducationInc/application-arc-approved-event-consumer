@@ -1,9 +1,8 @@
-module.exports =
-    {
-        getApiKey: () => {
-            return 'suchapikey'
-        },
-        getAcademicServiceUrl: () => {
-            return 'suchurl';
-        }
-    };
+module.exports = {
+  getApiKey: () => {
+    return 'suchapikey';
+  },
+  getAcademicServiceUrl: () => {
+    return 'suchurl';
+  },
+};

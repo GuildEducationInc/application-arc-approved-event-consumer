@@ -7,11 +7,11 @@ const { ApprovalError } = require('../errors/errors');
  * @returns {string}
  */
 function buildErrorMessage(errors) {
-    let errorMessage = "Failed Failed to approve application:";
-    for (message of errors.map(e => e.message)) {
-        errorMessage += `\n\t* ${message}`;
-    }
-    return errorMessage;
+  let errorMessage = 'Failed Failed to approve application:';
+  for (message of errors.map(e => e.message)) {
+    errorMessage += `\n\t* ${message}`;
+  }
+  return errorMessage;
 }
 
 /**
@@ -23,12 +23,12 @@ function buildErrorMessage(errors) {
  * @returns {Promise<string>}
  */
 async function approve({ genesisApplicationId, approvalDate }, config) {
-    const { getAcademicServiceUrl, getApiKey } = config;
-    const response = await fetch(getAcademicServiceUrl(), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${getApiKey()}` },
-        body: JSON.stringify({ query:
-                `mutation {
+  const { getAcademicServiceUrl, getApiKey } = config;
+  const response = await fetch(getAcademicServiceUrl(), {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${getApiKey()}` },
+    body: JSON.stringify({
+      query: `mutation {
                     approveApplication(
                     input: {
                         genesisApplicationId: "${genesisApplicationId}",
@@ -36,19 +36,19 @@ async function approve({ genesisApplicationId, approvalDate }, config) {
                     }) {
                         id
                     }
-                }`
-        })
-    });
-    if(response.status !== 200) {
-        throw new Error(`Failed to query graphql: ${response.status}.`)
-    }
-    const body = await response.json();
-    if (body.errors !== undefined) {
-        throw new ApprovalError(buildErrorMessage(body.errors));
-    }
-    const applicationId = body.data.approveApplication.id;
-    console.log(`Application: ${applicationId} approved.`);
-    return applicationId;
+                }`,
+    }),
+  });
+  if (response.status !== 200) {
+    throw new Error(`Failed to query graphql: ${response.status}.`);
+  }
+  const body = await response.json();
+  if (body.errors !== undefined) {
+    throw new ApprovalError(buildErrorMessage(body.errors));
+  }
+  const applicationId = body.data.approveApplication.id;
+  console.log(`Application: ${applicationId} approved.`);
+  return applicationId;
 }
 
 module.exports = approve;

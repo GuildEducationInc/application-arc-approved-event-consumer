@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Consumes application arc approved events from the event bus",
   "main": "index.js",
+  "prettier": "@guildeducationinc/prettier-config",
   "scripts": {
+    "lint": "prettier --write src/**/*.js spec/**/*.js",
     "test": "node_modules/.bin/mocha spec/**"
   },
   "author": "Spencer Post",
@@ -11,7 +13,9 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "fetch-mock": "^8.0.0-alpha.11",
-    "mocha": "^6.2.2"
+    "mocha": "^6.2.2",
+    "prettier": "^1.18.2",
+    "@guildeducationinc/prettier-config": "^2.0.0"
   },
   "dependencies": {
     "node-fetch": "^2.6.0",
