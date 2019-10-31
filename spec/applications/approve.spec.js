@@ -26,7 +26,7 @@ describe('approve', () => {
                 genesisApplicationId: '64995336-e331-4ea2-9447-2e449c0ce621',
                 approvalDate: '2019-09-10T12:03:57Z'
             }, config);
-            throw new Error('Can\'t reach.');
+            throw new Error('Test failed--expected error to have already been thrown');
         } catch (ex) {
             expect(ex.message).to.contain('403')
         }
@@ -46,7 +46,7 @@ describe('approve', () => {
                 genesisApplicationId: '64995336-e331-4ea2-9447-2e449c0ce621',
                 approvalDate: '2019-09-10T12:03:57Z'
             }, config);
-            throw new Error('Can\'t reach.');
+            throw new Error('Test failed--expected error to have already been thrown');
         } catch (ex) {
             expect(ex.message).to.contain(message1);
             expect(ex.message).to.contain(message2)
