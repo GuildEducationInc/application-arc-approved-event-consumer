@@ -13,10 +13,6 @@ Parameters:
     Type: AWS::SSM::Parameter::Value<List<String>>
     Description: The value of the secret key used to sign Guild jwts
     Default: guild-graphql-service-api-keys-dev
-  AcademicApiUrl:
-    Type: AWS::SSM::Parameter::Value<String>
-    Description: The url of the academic service
-    Default: slack-api-host
 
 Mappings:
   Environments:
