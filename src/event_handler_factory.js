@@ -13,16 +13,22 @@ function getEventHandler(event) {
 }
 
 function getStateChangedEvent(event) {
-    const { to_state: toState, from_state: fromState } = event;
+    const {
+        to_state: toState,
+        from_state: fromState,
+        genesis_application_id: genesisApplicationId
+    } = event;
     if (toState === 'Approved, ARC') {
         return handleApprovalEvent.bind(event);
     } else if (fromState === 'Approved, ARC') {
         if (toState !== 'Application Sent, University') {
+            console.log(`Reverting application with Genesis ID ${genesisApplicationId} because the state changed from ${fromState} to ${toState}`);
             return handleRevertApprovalEvent.bind(event);
         }
     }
-    console.log(`No handler available for state combination from_state:${fromState} to_state${toState}.`);
-    return () => { };
+    console.log(`No handler available for state combination from_state:${fromState} to_state:${toState}.`);
+    return () => {
+    };
 }
 
 module.exports = getEventHandler;
