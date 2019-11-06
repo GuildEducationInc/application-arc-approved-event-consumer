@@ -1,4 +1,3 @@
-global.fetch = require('node-fetch');
 const { approve, revertApproval } = require('./application');
 const { ApprovalError, RevertApprovalError } = require('./errors');
 

@@ -1,3 +1,4 @@
+global.fetch = require('node-fetch');
 const { ApprovalError, RevertApprovalError } = require('./errors');
 
 async function query(genesisApplicationId, stateChangedAt, config) {
@@ -24,7 +25,8 @@ async function query(genesisApplicationId, stateChangedAt, config) {
 }
 
 async function approve(genesisApplicationId, stateChangedAt, config) {
-    const body = await query(genesisApplicationId, stateChangedAt, config);
+    const stateChangedAtString = `"${stateChangedAt}"`;
+    const body = await query(genesisApplicationId, stateChangedAtString, config);
     if (body.errors !== undefined) {
         throw new ApprovalError(body);
     }
