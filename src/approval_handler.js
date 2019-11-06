@@ -2,10 +2,7 @@ const { approve, revertApproval } = require('./application');
 const { ApprovalError, RevertApprovalError } = require('./errors');
 
 async function handleApprovalEvent(config) {
-  const {
-    genesis_application_id: genesisApplicationId,
-    state_changed_at: stateChangedAt
-  } = this;
+  const { genesis_application_id: genesisApplicationId, state_changed_at: stateChangedAt } = this;
   let applicationId;
   try {
     applicationId = await approve(genesisApplicationId, stateChangedAt, config);
