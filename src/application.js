@@ -10,7 +10,7 @@ async function query(genesisApplicationId, stateChangedAt, config) {
                     approveApplication(
                     input: {
                         genesisApplicationId: "${genesisApplicationId}",
-                        approvedAt: "${stateChangedAt}"
+                        approvedAt: ${stateChangedAt}
                     }) {
                         id
                     }
