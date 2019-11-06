@@ -1,4 +1,4 @@
-# Application Arc Approved Event Consumer
+# Salesforce Application State Changed Event Consumer
 
 ## Local Development
 1. Clone the repo.
@@ -10,17 +10,19 @@ Run `STAGE=dev make` to deploy to dev.
 Run `make clean` to cleanup the deploy artifacts.
 
 ## About
-1. Consumes `salesforce-application-arc-approved` events from the event bus.
+1. Consumes `salesforce-application-state-changed` events from the event bus.
 2. Uses the genesis application id on the event to call academic services' `approveApplication` mutation.
 
 These events are of the form:
 ```$json
 {
   "metadata": {
-    "eventType": "salesforce-application-arc-approved"
+    "eventType": "salesforce-application-state-changed"
   },
   "genesis_application_id": "64995336-e331-4ea2-9447-2e449c0ce121",
-  "arc_approval_date": "2019-09-10T12:03:57Z"
+  "state_changed_at": "2019-09-10T12:03:57Z",
+  "from_state": "",
+  "to_state": ""
 }
 ```
 
@@ -61,10 +63,12 @@ lambda is consuming events off of the `salesforce-${STAGE}` kinesis stream.
   "events": [
     {
       "metadata": {
-        "eventType": "salesforce-application-arc-approved"
+        "eventType": "salesforce-application-state-changed"
       },
       "genesis_application_id": "<id-goes-here>",
-      "arc_approval_date": "2019-09-10T12:03:57Z"
+      "state_changed_at": "2019-09-10T12:03:57Z",
+      "from_state": "",
+      "to_state": ""
     }
   ]
 }

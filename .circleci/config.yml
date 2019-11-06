@@ -1,12 +1,14 @@
 # Javascript Node CircleCI 2.0 configuration file
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
+dir: &dir ~/salesforce-application-state-changed-event-consumer
+
 version: 2
 jobs:
   test:
     docker:
       - image: guildeducation/node-lambda:latest
-    working_directory: ~/application-arc-approved-event-consumer
+    working_directory: *dir
     steps:
       - checkout
       - run:
@@ -20,7 +22,7 @@ jobs:
   deploy_dev:
     docker:
       - image: guildeducation/node-lambda:latest
-    working_directory: ~/application-arc-approved-event-consumer
+    working_directory: *dir
     steps:
       - checkout
       - run:
@@ -38,7 +40,7 @@ jobs:
   deploy_prod:
     docker:
       - image: guildeducation/node-lambda:latest
-    working_directory: ~/application-arc-approved-event-consumer
+    working_directory: *dir
     steps:
       - checkout
       - run:

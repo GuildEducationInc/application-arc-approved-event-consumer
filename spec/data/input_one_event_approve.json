@@ -1,0 +1,21 @@
+{
+  "Records": [
+    {
+      "kinesis": {
+        "kinesisSchemaVersion": "1.0",
+        "partitionKey": "1",
+        "sequenceNumber": "49590338271490256608559692538361571095921575989136588898",
+        "data": "ewogICJtZXRhZGF0YSI6IHsKICAgICJldmVudFR5cGUiOiAic2FsZXNmb3JjZS1hcHBsaWNhdGlvbi1zdGF0ZS1jaGFuZ2VkIgogIH0sCiAgImdlbmVzaXNfYXBwbGljYXRpb25faWQiOiAxMjM0LAogICJzdGF0ZV9jaGFuZ2VkX2F0IjogIjIwMTktMDktMTBUMTI6MDM6NTdaIiwKICAiZ3VpbGRfdXVpZCI6ICI5MWMwODczNC02MjgzLTRlMDUtOTI1NS0yOTEyODRkODBkOGQiLAogICJ0b19zdGF0ZSI6ICJBcHByb3ZlZCwgQVJDIiwKICAiZnJvbV9zdGF0ZSI6ICJBcHBsaWNhdGlvbiBTdWJtaXR0ZWQiCn0=",
+        "approximateArrivalTimestamp": 1545084650.987
+      },
+      "eventSource": "aws:kinesis",
+      "eventVersion": "1.0",
+      "eventID": "shardId-000000000006:49590338271490256608559692538361571095921575989136588898",
+      "eventName": "aws:kinesis:record",
+      "invokeIdentityArn": "arn:aws:iam::123456789012:role/lambda-kinesis-role",
+      "awsRegion": "us-east-2",
+      "eventSourceARN": "arn:aws:kinesis:us-east-2:123456789012:stream/lambda-stream"
+    }
+  ]
+}
+

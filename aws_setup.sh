@@ -15,6 +15,3 @@ else
 	echo "Should only be used on branches develop or master."
 	exit 1
 fi
-
-
-

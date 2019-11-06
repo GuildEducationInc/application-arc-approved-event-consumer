@@ -5,7 +5,7 @@ endif
 
 all: package.zip package.${STAGE}.yaml
 	$(prefix) sam deploy --template-file package.${STAGE}.yaml \
-	--stack-name application-arc-approved-event-consumer-us-west-2-${STAGE} --capabilities CAPABILITY_IAM \
+	--stack-name salesforce-application-state-changed-event-consumer-us-west-2-${STAGE} --capabilities CAPABILITY_IAM \
 	--parameter-overrides StageName=${STAGE}
 
 package.${STAGE}.yaml: template.yaml package.zip

@@ -1,7 +1,7 @@
 {
-  "name": "application-arc-approved-event-consumer",
+  "name": "salesforce-application-state-changed-event-consumer",
   "version": "1.0.0",
-  "description": "Consumes application arc approved events from the event bus",
+  "description": "Consumes application salesforce-application-state-changed events from the event bus.",
   "main": "index.js",
   "prettier": "@guildeducationinc/prettier-config",
   "scripts": {

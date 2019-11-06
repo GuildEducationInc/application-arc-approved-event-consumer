@@ -24,14 +24,14 @@ Mappings:
       'VpcSubnetIds': ['subnet-7d12681b', 'subnet-920893da', 'subnet-c45a609f']
 
 Resources:
-  ApplicationArcApprovedEventConsumer:
+  SalesforceApplicationStateChangedEventConsumer:
     Type: 'AWS::Serverless::Function'
     Properties:
       AutoPublishAlias: current
       Handler: index.handler
       Runtime: nodejs10.x
       CodeUri: package.zip
-      FunctionName: 'application-arc-approved-event-consumer'
+      FunctionName: 'salesforce-application-state-changed-event-consumer'
       Timeout: 300
       DeploymentPreference:
         Type: AllAtOnce
@@ -63,7 +63,7 @@ Resources:
               - 'kinesis:SubscribeToShard'
             Resource: '*'
 
-  ArcApprovalEventMapping:
+  SalesforceApplicationStateChangedEventMapping:
     Type: 'AWS::Lambda::EventSourceMapping'
     Properties:
       BatchSize: 100
@@ -71,5 +71,5 @@ Resources:
       EventSourceArn:
         'Fn::ImportValue':
           !Sub salesforce-event-stream-arn-${StageName}
-      FunctionName: !Ref ApplicationArcApprovedEventConsumer
+      FunctionName: !Ref SalesforceApplicationStateChangedEventConsumer
       StartingPosition: TRIM_HORIZON
