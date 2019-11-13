@@ -73,7 +73,9 @@ Resources:
               - 'kinesis:ListShards'
               - 'kinesis:ListStreams'
               - 'kinesis:SubscribeToShard'
-            Resource: '*'
+            Resource:
+              'Fn::ImportValue':
+                !Sub salesforce-event-stream-arn-${StageName}
 
   SalesforceApplicationStateChangedEventMapping:
     Type: 'AWS::Lambda::EventSourceMapping'
