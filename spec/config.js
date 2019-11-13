@@ -5,4 +5,7 @@ module.exports = {
   getAcademicServiceUrl: () => {
     return 'suchurl';
   },
+  getDlqUrl: () => {
+    return 'somedlqurl'
+  }
 };

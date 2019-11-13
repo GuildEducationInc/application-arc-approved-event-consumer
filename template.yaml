@@ -24,8 +24,15 @@ Mappings:
       'VpcSubnetIds': ['subnet-7d12681b', 'subnet-920893da', 'subnet-c45a609f']
 
 Resources:
+  SalesforceApplicationStateChangedDlq:
+    Type: 'AWS::SQS::Queue'
+    Properties:
+      QueueName: !Sub 'salesforce-application-state-changed-event-handler-dlq-${StageName}'
+      MessageRetentionPeriod: 691200
+
   SalesforceApplicationStateChangedEventConsumer:
     Type: 'AWS::Serverless::Function'
+    DependsOn: SalesforceApplicationStateChangedDlq
     Properties:
       AutoPublishAlias: current
       Handler: index.handler
@@ -38,6 +45,7 @@ Resources:
       Environment:
         Variables:
           API_KEY: !Select [0, !Ref ApiKey]
+          DLQ_URL: !Ref SalesforceApplicationStateChangedDlq
           ACADEMIC_API_URL:
             'Fn::ImportValue':
               !Sub ${StageName}AcademicAPIURL
@@ -54,6 +62,11 @@ Resources:
         - Statement:
             Effect: 'Allow'
             Action:
+              - 'sqs:SendMessage'
+            Resource: !GetAtt SalesforceApplicationStateChangedDlq.Arn
+        - Statement:
+            Effect: 'Allow'
+            Action:
               - 'kinesis:DescribeStream'
               - 'kinesis:DescribeStreamSummary'
               - 'kinesis:GetRecords'
@@ -61,7 +74,9 @@ Resources:
               - 'kinesis:ListShards'
               - 'kinesis:ListStreams'
               - 'kinesis:SubscribeToShard'
-            Resource: '*'
+            Resource:
+              'Fn::ImportValue':
+                !Sub salesforce-event-stream-arn-${StageName}
 
   SalesforceApplicationStateChangedEventMapping:
     Type: 'AWS::Lambda::EventSourceMapping'

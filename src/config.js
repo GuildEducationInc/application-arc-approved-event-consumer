@@ -5,4 +5,7 @@ module.exports = {
   getAcademicServiceUrl: () => {
     return process.env.ACADEMIC_API_URL;
   },
+  getDlqUrl: () => {
+    return process.env.DLQ_URL;
+  },
 };

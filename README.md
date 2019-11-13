@@ -38,7 +38,7 @@ following json or similar.
         "kinesisSchemaVersion": "1.0",
         "partitionKey": "1",
         "sequenceNumber": "49590338271490256608559692538361571095921575989136588898",
-        "data": "ewogICJtZXRhZGF0YSI6IHsKICAgICJldmVudFR5cGUiOiAic2FsZXNmb3JjZS1hcHBsaWNhdGlvbi1hcmMtYXBwcm92ZWQiCiAgfSwKICAiZ2VuZXNpc19hcHBsaWNhdGlvbl9pZCI6ICI2NDk5NTMzNi1lMzMxLTRlYTItOTQ0Ny0yZTQ0OWMwY2U2MjEiLAogICJhcmNfYXBwcm92YWxfZGF0ZSI6ICIyMDE5LTA5LTEwVDEyOjAzOjU3WiIsCiAgImd1aWxkX3V1aWQiOiAiOTFjMDg3MzQtNjI4My00ZTA1LTkyNTUtMjkxMjg0ZDgwZDhkIgp9",
+        "data": "ewogICJtZXRhZGF0YSI6IHsKICAgICJldmVudFR5cGUiOiAic2FsZXNmb3JjZS1hcHBsaWNhdGlvbi1zdGF0ZS1jaGFuZ2VkIgogIH0sCiAgImdlbmVzaXNfYXBwbGljYXRpb25faWQiOiAiNjQ5OTUzMzYtZTMzMS00ZWEyLTk0NDctMmU0NDljMGNlMTIxIiwKICAic3RhdGVfY2hhbmdlZF9hdCI6ICIyMDE5LTA5LTEwVDEyOjAzOjU3WiIsCiAgImZyb21fc3RhdGUiOiAiIiwKICAidG9fc3RhdGUiOiAiIgp9",
         "approximateArrivalTimestamp": 1545084650.987
       },
       "eventSource": "aws:kinesis",
