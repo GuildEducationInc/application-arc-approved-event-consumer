@@ -75,3 +75,11 @@ lambda is consuming events off of the `salesforce-${STAGE}` kinesis stream.
 ```
 Use either the genesis ID of an existing application or create a new application with a custom
 genesis application ID.
+
+## Working With the DLQ
+1. Log into the AWS Management Console via Jumpcloud and navigate to the Simple Queue Service home page.
+2. Select the salesforce-application-state-changed-event-handler-dlq-prod queue.
+3. Click the 'Queue Actions' dropdown and select 'View/Delete Messages'.
+4. Click 'Start Polling for Messages' to see the list of messages in the queue.
+5. Each message has an `Event` and `Stacktrace` corresponding to the error that occurred. 
+6. When the solution to the error(s) is found, apply the solution, which may involve editing the event bus event. Repost each failed event to the event bus manually, following the instructions on how to post event bus events listed above. Delete messages that have handled from the queue.
