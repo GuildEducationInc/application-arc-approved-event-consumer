@@ -9,11 +9,11 @@ class SqsDlq {
     buildMessage(error, event) {
         return {
             MessageAttributes: {
-                "Event": {
+                Event: {
                     DataType: "String",
                     StringValue: JSON.stringify(event)
                 },
-                "Stacktrace": {
+                Stacktrace: {
                     DataType: "String",
                     StringValue: error.stack
                 }
