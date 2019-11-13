@@ -27,7 +27,7 @@ Resources:
   SalesforceApplicationStateChangedDlq:
     Type: 'AWS::SQS::Queue'
     Properties:
-      QueueName: 'salesforce-application-state-changed-event-handler-dlq'
+      QueueName: !Sub 'salesforce-application-state-changed-event-handler-dlq-${StageName}'
       MessageRetentionPeriod: 691200
 
   SalesforceApplicationStateChangedEventConsumer:
