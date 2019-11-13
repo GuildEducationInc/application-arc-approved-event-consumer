@@ -28,6 +28,7 @@ Resources:
     Type: 'AWS::SQS::Queue'
     Properties:
       QueueName: 'salesforce-application-state-changed-event-handle-dlq'
+      MessageRetentionPeriod: 691200
 
   SalesforceApplicationStateChangedEventConsumer:
     Type: 'AWS::Serverless::Function'

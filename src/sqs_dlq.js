@@ -9,9 +9,13 @@ class SqsDlq {
     buildMessage(error, event) {
         return {
             MessageAttributes: {
-                "Failure": {
+                "Event": {
                     DataType: "String",
                     StringValue: JSON.stringify(event)
+                },
+                "Stacktrace": {
+                    DataType: "String",
+                    StringValue: error.stack
                 }
             },
             MessageBody: error.toString(),
@@ -23,8 +27,7 @@ class SqsDlq {
         const message = this.buildMessage(error, event);
         try {
             console.log(`An error occurred while processing an event. ${error}.`);
-            const result = await this.sqs.sendMessage(message);
-            console.log(result);
+            await this.sqs.sendMessage(message);
         } catch(ex) {
             console.log(`Error putting failed event on DLQ ${ex}.`)
         }
