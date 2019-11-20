@@ -28,7 +28,7 @@ These events are of the form:
 
 ## Turning on the consumer
 The end-to-end flow of Salesforce events -> Academic Service is currently still in development, so this consumer is `disabled` by default. To enable the feature,
-edit the `Makefile` file so that the `ConsumerEnabled` paramater-override passed to the sam deploy command is `true` rather than `false` and re-deploy the stack.
+manually set the `CONSUMER_ENABLED` environment variable to true and re-deploy the stack. For example: `CONSUMER_ENABLED=true STAGE=dev make`.
 
 
 
