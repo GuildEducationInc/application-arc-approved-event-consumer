@@ -26,6 +26,11 @@ These events are of the form:
 }
 ```
 
+## Turning on the consumer
+The end-to-end flow of Salesforce events -> Academic Service is currently still in development, so this consumer is `disabled` by default. To enable the feature,
+edit the `Makefile` file so that the `ConsumerEnabled` paramater-override passed to the sam deploy command is `true` rather than `false` and re-deploy the stack.
+
+
 
 ## Direct Invoke Testing
 You can invoke the lambda by base64 encoding an event into the data field of the
@@ -81,5 +86,5 @@ genesis application ID.
 2. Select the salesforce-application-state-changed-event-handler-dlq-prod queue.
 3. Click the 'Queue Actions' dropdown and select 'View/Delete Messages'.
 4. Click 'Start Polling for Messages' to see the list of messages in the queue.
-5. Each message has an `Event` and `Stacktrace` corresponding to the error that occurred. 
+5. Each message has an `Event` and `Stacktrace` corresponding to the error that occurred.
 6. When the solution to the error(s) is found, apply the solution, which may involve editing the event bus event. Repost each failed event to the event bus manually, following the instructions on how to post event bus events listed above. Delete messages that have handled from the queue.

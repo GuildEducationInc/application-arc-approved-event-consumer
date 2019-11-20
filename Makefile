@@ -6,7 +6,7 @@ endif
 all: package.zip package.${STAGE}.yaml
 	$(prefix) sam deploy --template-file package.${STAGE}.yaml \
 	--stack-name salesforce-application-state-changed-event-consumer-us-west-2-${STAGE} --capabilities CAPABILITY_IAM \
-	--parameter-overrides StageName=${STAGE}
+	--parameter-overrides StageName=${STAGE} ConsumerEnabled=false
 
 package.${STAGE}.yaml: template.yaml package.zip
 	$(prefix) sam package --template-file template.yaml \
