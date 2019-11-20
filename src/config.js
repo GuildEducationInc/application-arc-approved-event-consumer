@@ -8,4 +8,7 @@ module.exports = {
   getDlqUrl: () => {
     return process.env.DLQ_URL;
   },
+  getConsumerEnabled: () => {
+    return process.env.CONSUMER_ENABLED === 'true';
+  }
 };

@@ -3,25 +3,37 @@ const { ApprovalError, RevertApprovalError } = require('./errors');
 
 async function query(genesisApplicationId, stateChangedAt, config) {
   const { getAcademicServiceUrl, getApiKey } = config;
-  const response = await fetch(getAcademicServiceUrl(), {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${getApiKey()}` },
-    body: JSON.stringify({
-      query: `mutation {
-                    approveApplication(
-                    input: {
-                        genesisApplicationId: "${genesisApplicationId}",
-                        approvedAt: ${stateChangedAt}
-                    }) {
-                        id
-                    }
-                }`,
-    }),
-  });
-  if (response.status !== 200) {
-    throw new Error(`Failed to query graphql: ${response.status}.`);
+  if (config.getConsumerEnabled()) {
+    const response = await fetch(getAcademicServiceUrl(), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${getApiKey()}` },
+      body: JSON.stringify({
+        query: `mutation {
+                      approveApplication(
+                      input: {
+                          genesisApplicationId: "${genesisApplicationId}",
+                          approvedAt: ${stateChangedAt}
+                      }) {
+                          id
+                      }
+                  }`,
+      }),
+    });
+    if (response.status !== 200) {
+      throw new Error(`Failed to query graphql: ${response.status}.`);
+    }
+    return await response.json();
+  } else {
+    console.log('Consumer Disabled: mocking response for query to \'approveApplication\' with inputs: ', { genesisApplicationId, stateChangedAt })
+    return {
+      data: {
+        approveApplication: {
+          id: 'mock-platform-application-id'
+        }
+      }
+    }
   }
-  return await response.json();
+
 }
 
 async function approve(genesisApplicationId, stateChangedAt, config) {

@@ -7,5 +7,8 @@ module.exports = {
   },
   getDlqUrl: () => {
     return 'somedlqurl'
+  },
+  getConsumerEnabled: () => {
+    return true;
   }
 };
