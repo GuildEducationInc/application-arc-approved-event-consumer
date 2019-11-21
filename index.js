@@ -8,6 +8,11 @@ exports.handler = async function (event, context) {
     try {
         return await Promise.all(parseEvents(event).map(getEventHandler).map(f => f(config)));
     } catch(ex) {
-        await dlq.put(ex, event)
+        if(config.getConsumerEnabled()) {
+            await dlq.put(ex, event)
+        } else {
+            console.log('Consumer Disabled: failed to process event: ', { event, exception: ex } )
+        }
+
     }
 };
